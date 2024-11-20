@@ -108,7 +108,7 @@ const InquiryForm = () => {
     try {
       // Replace the URL with your actual API endpoint
       const response = await axios.post(
-        "http://localhost:8080/submit-inquiry",
+        "http://82.112.227.244:8080/submit-inquiry",
         formDataToSubmit
       );
       // Handle the response from the server

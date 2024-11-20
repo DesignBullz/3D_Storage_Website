@@ -579,7 +579,7 @@ function AdminDashboard() {
   useEffect(() => {
     // Fetch summary data for the table view
     axios
-      .get("http://localhost:8080/uploads/summary")
+      .get("http://82.112.227.244:8080/uploads/summary")
       .then((response) => {
         setSummaryData(response.data.summary);
         setLoading(false);
@@ -594,7 +594,7 @@ function AdminDashboard() {
   useEffect(() => {
     // Fetch design counts for graph and wave view
     axios
-      .get("http://localhost:8080/uploads/count")
+      .get("http://82.112.227.244:8080/uploads/count")
       .then((response) => {
         setDesignCounts(response.data.design_counts);
         // Get the total upload count from the response

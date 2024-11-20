@@ -116,7 +116,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("http://localhost:8080/login", {
+      const response = await axios.post("http://82.112.227.244:8080/login", {
         email,
         password,
       });
