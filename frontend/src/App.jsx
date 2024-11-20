@@ -1,14 +1,14 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Upload from "./pages/Upload";
-import ViewFiles from "./pages/ViewFiles";
-import AdminPanel from "./pages/AdminPanel";
-import Login from "./pages/Login";
-import Signup from "./pages/Signup";
-import AdminLogin from "./pages/adminLogin";
-import AdminDashboard from "./pages/AdminDashboard";
-import InquiryForm from "./pages/InquiryForm";
+import Upload from "./pages/upload.jsx";
+import ViewFiles from "./pages/ViewFiles.jsx";
+import AdminPanel from "./pages/AdminPanel.jsx";
+import Login from "./pages/Login.jsx";
+import Signup from "./pages/Signup.jsx";
+import AdminLogin from "./pages/AdminLogin.jsx";
+import AdminDashboard from "./pages/AdminDashboard.jsx";
+import InquiryForm from "./pages/InquiryForm.jsx";
 function App() {
   return (
     <Router>

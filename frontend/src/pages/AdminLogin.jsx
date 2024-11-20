@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
 
 function AdminLogin() {
   const [email, setEmail] = useState("");
