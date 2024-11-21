@@ -362,6 +362,7 @@ function ViewFiles() {
 
     try {
       setLoading(true);
+
       const response = await axios.get("http://82.112.227.244:8080/uploads", {
         params: { design, front_depth, industry },
       });

@@ -373,8 +373,8 @@ import {
   FaSearch,
   FaTimesCircle,
 } from "react-icons/fa";
-import Header from "./Header";
-import Footer from "./Footer";
+import Header from "./Header.jsx";
+import Footer from "./Footer.jsx";
 
 function AdminPanel() {
   const [files, setFiles] = useState([]);
@@ -407,7 +407,7 @@ function AdminPanel() {
   // Fetch unique industries for the dropdown
   const fetchIndustries = async () => {
     try {
-      const response = await axios.get("http://localhost:8080/industries");
+      const response = await axios.get("http://82.112.227.244:8080/industries");
       setIndustries(response.data.industries);
     } catch (error) {
       console.error("Error fetching industries:", error);
@@ -478,7 +478,7 @@ function AdminPanel() {
 
     try {
       const response = await axios.put(
-        `http://localhost:8080/uploads/${file.file_number}`,
+        `http://82.112.227.244:8080/uploads/${file.file_number}`,
         formData,
         { headers: { "Content-Type": "multipart/form-data" } }
       );
