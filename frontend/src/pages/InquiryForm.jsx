@@ -108,7 +108,7 @@ const InquiryForm = () => {
     try {
       // Replace the URL with your actual API endpoint
       const response = await axios.post(
-        "http://82.112.227.244:8080/submit-inquiry",
+        "https://api.dbzmanager.com/submit-inquiry",
         formDataToSubmit
       );
       // Handle the response from the server

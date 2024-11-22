@@ -287,7 +287,7 @@ function Upload() {
     formData.append("file2", file2);
 
     try {
-      await axios.post("http://82.112.227.244:8080/upload", formData, {
+      await axios.post("https://api.dbzmanager.com/upload", formData, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
