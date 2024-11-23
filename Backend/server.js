@@ -1,6 +1,5 @@
 import express from "express";
-// import mysql from "mysql2";
-import mysql from "mysql2/promise";
+import mysql from "mysql2";
 import cors from "cors";
 import multer from "multer";
 import dotenv from "dotenv";
@@ -19,23 +18,20 @@ app.use(cors());
 app.use(express.json());
 
 // MySQL connection
-const pool = mysql.createPool({
+const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASSWORD,
   database: process.env.DB_NAME,
-  waitForConnections: true,
-  connectionLimit: 10,
-  queueLimit: 0,
 });
 
-// Check the pool connection to confirm it's working
-try {
-  const [rows] = await pool.query("SELECT 1");
-  console.log("Connected to MySQL pool🎉".bgMagenta.white);
-} catch (error) {
-  console.error("Error connecting to MySQL pool:", error);
-}
+db.connect((err) => {
+  if (err) {
+    console.error("Error connecting to MySQL:", err);
+    return;
+  }
+  console.log("MySQL connected🎉".bgMagenta.white);
+});
 
 // Setup multer for file upload (multiple files)
 const storage = multer.diskStorage({
@@ -188,75 +184,40 @@ app.post("/login", (req, res) => {
 });
 
 // POST route to upload files
-// app.post(
-//   "/upload",
-//   upload.fields([{ name: "file1" }, { name: "file2" }]),
-//   (req, res) => {
-//     const { design, front_depth, industry } = req.body;
-//     const uniqueFileNumber = generateUniqueFileNumber(); // Generate a unique file number
-
-//     const fileUrl1 = req.files.file1
-//       ? `https://api.dbzmanager.com/uploads/${req.files.file1[0].filename}`
-//       : null;
-//     const fileUrl2 = req.files.file2
-//       ? `https://api.dbzmanager.com/uploads/${req.files.file2[0].filename}`
-//       : null;
-
-//     const query =
-//       "INSERT INTO uploads (design, front_depth, industry, file_number, file_url_1, file_url_2) VALUES (?, ?, ?, ?, ?, ?)";
-//     db.query(
-//       query,
-//       [design, front_depth, industry, uniqueFileNumber, fileUrl1, fileUrl2],
-//       (err, result) => {
-//         if (err) {
-//           console.error("Error inserting data into MySQL:", err);
-//           return res
-//             .status(500)
-//             .json({ error: "Error inserting data into MySQL" });
-//         }
-//         console.log("Data inserted into MySQL:", result);
-//         res.status(200).json({
-//           message: "Data submitted successfully",
-//           fileUrls: { file1: fileUrl1, file2: fileUrl2 },
-//           uniqueFileNumber,
-//         });
-//       }
-//     );
-//   }
-// );
-
-// Asynchronous POST route to upload files
 app.post(
   "/upload",
   upload.fields([{ name: "file1" }, { name: "file2" }]),
-  async (req, res) => {
-    try {
-      const { design, front_depth, industry } = req.body;
-      const uniqueFileNumber = generateUniqueFileNumber(); // Generate a unique file number
+  (req, res) => {
+    const { design, front_depth, industry } = req.body;
+    const uniqueFileNumber = generateUniqueFileNumber(); // Generate a unique file number
 
-      const fileUrl1 = req.files.file1
-        ? `https://api.dbzmanager.com/uploads/${req.files.file1[0].filename}`
-        : null;
-      const fileUrl2 = req.files.file2
-        ? `https://api.dbzmanager.com/uploads/${req.files.file2[0].filename}`
-        : null;
+    const fileUrl1 = req.files.file1
+      ? `https://api.dbzmanager.com/uploads/${req.files.file1[0].filename}`
+      : null;
+    const fileUrl2 = req.files.file2
+      ? `https://api.dbzmanager.com/uploads/${req.files.file2[0].filename}`
+      : null;
 
-      // Using the connection pool to insert data into MySQL
-      const [result] = await pool.query(
-        "INSERT INTO uploads (design, front_depth, industry, file_number, file_url_1, file_url_2) VALUES (?, ?, ?, ?, ?, ?)",
-        [design, front_depth, industry, uniqueFileNumber, fileUrl1, fileUrl2]
-      );
-
-      // Respond with success after database insertion
-      res.status(200).json({
-        message: "Data submitted successfully",
-        fileUrls: { file1: fileUrl1, file2: fileUrl2 },
-        uniqueFileNumber,
-      });
-    } catch (error) {
-      console.error("Error processing file upload:", error);
-      res.status(500).json({ error: "Error processing file upload" });
-    }
+    const query =
+      "INSERT INTO uploads (design, front_depth, industry, file_number, file_url_1, file_url_2) VALUES (?, ?, ?, ?, ?, ?)";
+    db.query(
+      query,
+      [design, front_depth, industry, uniqueFileNumber, fileUrl1, fileUrl2],
+      (err, result) => {
+        if (err) {
+          console.error("Error inserting data into MySQL:", err);
+          return res
+            .status(500)
+            .json({ error: "Error inserting data into MySQL" });
+        }
+        console.log("Data inserted into MySQL:", result);
+        res.status(200).json({
+          message: "Data submitted successfully",
+          fileUrls: { file1: fileUrl1, file2: fileUrl2 },
+          uniqueFileNumber,
+        });
+      }
+    );
   }
 );
 
