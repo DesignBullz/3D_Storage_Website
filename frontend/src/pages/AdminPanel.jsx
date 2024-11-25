@@ -148,142 +148,112 @@ function AdminPanel() {
     <div className="flex flex-col min-h-screen bg-gray-50 text-black font-body">
       <Header />
 
-      {/* Left side upload files */}
-      <div className="w-full p-6 text-center shadow-lg">
-        <div className="flex justify-between items-center">
-          {/* center content (User icon and admin text) */}
+      {/* Admin Panel Section */}
+      <div className="w-full p-6 text-center shadow-lg flex justify-center items-center">
+        <div className="flex items-center">
+          <FaUserCircle size={60} />
           <div className="ml-4">
-            <Link
-              to="/upload" // Path to the signup page
-              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
-            >
-              Upload files
-            </Link>
-          </div>
-          <div className="flex items-center">
-            <FaUserCircle size={60} />
-            <div className="ml-4">
-              <h1 className="text-2xl font-semibold">Admin Panel</h1>
-              <p className="text-sm">Welcome, Admin</p>
-            </div>
-          </div>
-
-          {/* Right content (Create New User button) */}
-          <div className="ml-4">
-            <Link
-              to="/signup" // Path to the signup page
-              className="bg-green-500 text-white px-4 py-2 rounded-md hover:bg-green-600 transition duration-300"
-            >
-              Create New User
-            </Link>
+            <h1 className="text-2xl font-semibold">Admin Panel</h1>
+            <p className="text-sm">Welcome, Admin</p>
           </div>
         </div>
       </div>
-      <main className="flex-grow flex items-center justify-center p-8">
-        <div className="w-full max-w-2xl p-6 border rounded-lg shadow-lg bg-gray-100">
-          <h2 className="text-4xl font-heading font-bold mb-5 text-center text-blue-600">
+
+      <main className="flex-grow flex flex-col items-center p-8">
+        <div className="w-full max-w-7xl p-8 border rounded-lg shadow-lg bg-gray-100">
+          <h2 className="text-4xl font-heading font-bold mb-8 text-center text-blue-600">
             Search Files
           </h2>
+          <div className="flex items-center justify-between gap-8 mb-6">
+            {/* Design Selection */}
+            <div className="w-[20%]">
+              <label className="block text-sm font-semibold mb-2">Design</label>
+              <select
+                value={searchParams.design}
+                onChange={(e) =>
+                  setSearchParams({ ...searchParams, design: e.target.value })
+                }
+                className="border p-3 rounded-md w-full"
+              >
+                <option value="">Select Design</option>
+                {[
+                  "1 side open",
+                  "2 side open",
+                  "3 side open",
+                  "4 side open",
+                ].map((design, index) => (
+                  <option key={index} value={design}>
+                    {design}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          {/* Design Selection with Icons */}
-          <div className="mb-6">
-            <label className="text-sm font-semibold text-gray-700 mb-2 block">
-              Design
-            </label>
-            <div className="flex justify-between">
-              {["1 side open", "2 side open", "3 side open", "4 side open"].map(
-                (design, index) => (
-                  <div
-                    key={index}
-                    onClick={() => setSearchParams({ ...searchParams, design })}
-                    className={`cursor-pointer p-4 text-center rounded-md border transition duration-200 ease-in-out transform hover:scale-105 ${
-                      searchParams.design === design
-                        ? "bg-blue-500 text-white"
-                        : "bg-gray-200"
-                    }`}
-                  >
-                    {index === 0 && <FaArrowRight size={40} />}
-                    {index === 1 && <FaCube size={40} />}
-                    {index === 2 && <FaFileImage size={40} />}
-                    {index === 3 && <FaDesktop size={40} />}
-                    <p className="mt-2">{design}</p>
-                  </div>
-                )
-              )}
+            {/* Front Input */}
+            <div className="w-[20%]">
+              <label className="block text-sm font-semibold mb-2">Front</label>
+              <input
+                type="text"
+                placeholder="Enter Front Dimension"
+                value={searchParams.front}
+                onChange={(e) =>
+                  setSearchParams({ ...searchParams, front: e.target.value })
+                }
+                className="border p-3 rounded-md w-full"
+              />
+            </div>
+
+            {/* Depth Input */}
+            <div className="w-[20%]">
+              <label className="block text-sm font-semibold mb-2">Depth</label>
+              <input
+                type="text"
+                placeholder="Enter Depth Dimension"
+                value={searchParams.depth}
+                onChange={(e) =>
+                  setSearchParams({ ...searchParams, depth: e.target.value })
+                }
+                className="border p-3 rounded-md w-full"
+              />
+            </div>
+
+            {/* Industry Dropdown */}
+            <div className="w-[20%]">
+              <label className="block text-sm font-semibold mb-2">
+                Industry
+              </label>
+              <select
+                value={searchParams.industry}
+                onChange={(e) =>
+                  setSearchParams({ ...searchParams, industry: e.target.value })
+                }
+                className="border p-3 rounded-md w-full"
+              >
+                <option value="">Select Industry</option>
+                {industries.map((industry, index) => (
+                  <option key={index} value={industry}>
+                    {industry}
+                  </option>
+                ))}
+              </select>
+            </div>
+
+            {/* Search and Reset Buttons */}
+            <div className="flex gap-4 w-[20%] justify-center">
+              <button
+                onClick={handleSearch}
+                className="bg-blue-500 mt-5 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600"
+              >
+                <FaSearch className="inline mr-2" /> Search
+              </button>
+              <button
+                onClick={handleReset}
+                className="bg-gray-400 mt-5 text-white px-4 py-2 rounded-md shadow hover:bg-gray-500"
+              >
+                <FaTimesCircle className="inline mr-2" /> Reset
+              </button>
             </div>
           </div>
-
-          {/* Front Input */}
-          <div className="mb-6">
-            <label className="text-sm font-semibold text-gray-700 mb-2 block">
-              Front
-            </label>
-            <input
-              type="text"
-              placeholder="Front"
-              value={searchParams.front}
-              onChange={(e) =>
-                setSearchParams({ ...searchParams, front: e.target.value })
-              }
-              className="border p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          {/* Depth Input */}
-          <div className="mb-6">
-            <label className="text-sm font-semibold text-gray-700 mb-2 block">
-              Depth
-            </label>
-            <input
-              type="text"
-              placeholder="Depth"
-              value={searchParams.depth}
-              onChange={(e) =>
-                setSearchParams({ ...searchParams, depth: e.target.value })
-              }
-              className="border p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            />
-          </div>
-
-          {/* Industry Dropdown */}
-          <div className="mb-6">
-            <label className="text-sm font-semibold text-gray-700 mb-2 block">
-              Industry
-            </label>
-            <select
-              value={searchParams.industry}
-              onChange={(e) =>
-                setSearchParams({ ...searchParams, industry: e.target.value })
-              }
-              className="border p-2 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
-            >
-              <option value="">Select Industry</option>
-              {industries.map((industry, index) => (
-                <option key={index} value={industry}>
-                  {industry}
-                </option>
-              ))}
-            </select>
-          </div>
-
-          {/* Search and Reset Buttons */}
-          <div className="flex justify-between items-center mb-6">
-            <button
-              onClick={handleSearch}
-              className="bg-blue-500 text-white px-4 py-2 rounded-md w-full hover:bg-blue-600 transition duration-300"
-            >
-              <FaSearch className="mr-2 inline" /> Search
-            </button>
-            <button
-              onClick={handleReset}
-              className="bg-gray-400 text-white px-4 py-2 rounded-md ml-4"
-            >
-              <FaTimesCircle className="mr-2 inline" /> Reset
-            </button>
-          </div>
-
-          {loading && <p className="mt-4 text-center">Loading files...</p>}
-          {errorMessage && <p className="text-red-600 mt-4">{errorMessage}</p>}
         </div>
       </main>
 
@@ -298,7 +268,7 @@ function AdminPanel() {
               files.map((file, index) => (
                 <div
                   key={index}
-                  className="border p-4 rounded-lg shadow-lg flex flex-col transition transform hover:scale-105"
+                  className="border p-4 rounded-lg shadow-lg flex flex-col transition transform "
                 >
                   {/* Display file image 1 */}
                   {file.file_url_1 &&

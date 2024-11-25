@@ -51,7 +51,7 @@ const Sidebar = () => {
           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
         >
           <FaUpload size={20} />
-          <span className="text-lg font-body">Uploads</span>
+          <span className="text-lg font-body">Upload Design</span>
         </Link>
         <Link
           to="/signup"
