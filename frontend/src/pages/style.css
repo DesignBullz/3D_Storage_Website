@@ -1,0 +1,28 @@
+/* Add this CSS for the table */
+table {
+  width: 100%;
+  table-layout: fixed; /* Ensures columns have fixed width */
+  border-collapse: collapse; /* Prevents spacing between table cells */
+}
+
+th,
+td {
+  padding: 12px; /* Adds padding inside cells */
+  text-align: left; /* Aligns text to the left */
+  vertical-align: middle; /* Vertically centers text */
+  border: 1px solid #ddd; /* Adds border around cells */
+}
+
+th {
+  background-color: #4caf50;
+  color: white;
+}
+
+td {
+  background-color: #f2f2f2;
+}
+
+td img {
+  max-width: 100px;
+  height: auto;
+}

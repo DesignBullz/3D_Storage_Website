@@ -24,11 +24,11 @@ export default {
         googleGray: "#5F6368", // General text color
         googleDarkGray: "#3C4043", // Darker text
       },
-      // fontFamily: {
-      //   heading: ["Poppins", "sans-serif"],
-      //   body: ["Roboto", "sans-serif"],
-      //   sans: ["Roboto", "Arial", "sans-serif"], // Match Google Forms' font
-      // },
+      fontFamily: {
+        heading: ["Poppins", "sans-serif"],
+        body: ["Roboto", "sans-serif"],
+        sans: ["Roboto", "Arial", "sans-serif"], // Match Google Forms' font
+      },
     },
   },
   plugins: [],

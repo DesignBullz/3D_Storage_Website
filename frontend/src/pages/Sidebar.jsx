@@ -1,117 +1,25 @@
-// import React, { useState } from "react";
-// import { Link } from "react-router-dom"; // if you are using React Router for navigation
-// import {
-//   FaTachometerAlt,
-//   FaImage,
-//   FaUpload,
-//   FaCog,
-//   FaFileAlt,
-// } from "react-icons/fa"; // Importing icons from React Icons
-
-// const Sidebar = () => {
-//   const [isPagesOpen, setIsPagesOpen] = useState(false);
-
-//   const togglePagesDropdown = () => {
-//     setIsPagesOpen(!isPagesOpen);
-//   };
-
-//   return (
-//     <div className="bg-gradient-to-r from-indigo-600 via-indigo-800 to-indigo-900 w-64 min-h-screen p-6 text-white shadow-lg rounded-lg">
-//       <h2 className="text-3xl font-extrabold text-center mb-8 text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-500">
-//         Admin Panel
-//       </h2>
-//       <div className="flex flex-col space-y-6">
-//         <Link
-//           to="/"
-//           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
-//         >
-//           <FaTachometerAlt size={20} />
-//           <span className="text-lg font-semibold">Dashboard</span>
-//         </Link>
-//         <Link
-//           to="/designs"
-//           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
-//         >
-//           <FaImage size={20} />
-//           <span className="text-lg font-semibold">Designs</span>
-//         </Link>
-//         <Link
-//           to="/uploads"
-//           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
-//         >
-//           <FaUpload size={20} />
-//           <span className="text-lg font-semibold">Uploads</span>
-//         </Link>
-//         <Link
-//           to="/settings"
-//           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
-//         >
-//           <FaCog size={20} />
-//           <span className="text-lg font-semibold">Settings</span>
-//         </Link>
-
-//         {/* Pages Dropdown */}
-//         <div className="relative">
-//           <button
-//             onClick={togglePagesDropdown}
-//             className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 w-full"
-//           >
-//             <FaFileAlt size={20} />
-//             <span className="text-lg font-semibold">Pages</span>
-//           </button>
-
-//           {isPagesOpen && (
-//             <div className="absolute left-0 w-full mt-2 bg-indigo-700 rounded-lg shadow-lg">
-//               <Link
-//                 to="/about"
-//                 className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300"
-//               >
-//                 About Us
-//               </Link>
-//               <Link
-//                 to="/contact"
-//                 className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300"
-//               >
-//                 Contact Us
-//               </Link>
-//               <Link
-//                 to="/faq"
-//                 className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300"
-//               >
-//                 FAQ
-//               </Link>
-//             </div>
-//           )}
-//         </div>
-//       </div>
-//       <div className="absolute bottom-6 left-6 text-sm">
-//         <p className="text-gray-300">© 2024 Design Bullz</p>
-//       </div>
-//     </div>
-//   );
-// };
-
-// export default Sidebar;
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom"; // if you are using React Router for navigation
+import { Link } from "react-router-dom";
 import {
   FaTachometerAlt,
   FaImage,
   FaUpload,
   FaCog,
   FaFileAlt,
+  FaClipboardList,
+  FaFolder,
+  FaUserPlus, // Icon for "Create User"
 } from "react-icons/fa"; // Importing icons from React Icons
 
 const Sidebar = () => {
-  const [isPagesOpen, setIsPagesOpen] = useState(false);
+  const [isExpoOpen, setIsExpoOpen] = useState(false);
 
-  const togglePagesDropdown = () => {
-    setIsPagesOpen(!isPagesOpen);
+  const toggleExpoDropdown = () => {
+    setIsExpoOpen(!isExpoOpen);
   };
 
   return (
-    <div className="bg-gradient-to-r from-indigo-600 via-indigo-800 to-indigo-900 w-64 min-h-screen p-6 text-white shadow-lg rounded-lg">
+    <div className="bg-gradient-to-r from-indigo-600 via-indigo-800 to-indigo-900 w-64 min-h-screen p-6 text-white shadow-lg">
       <div className="flex flex-col items-center mb-8">
         {/* Avatar section */}
         <img
@@ -119,76 +27,74 @@ const Sidebar = () => {
           alt="Admin Avatar"
           className="w-20 h-20 rounded-full border-4 border-pink-400 mb-4"
         />
-        <h2 className="text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-500">
+        <h2 className="font-heading text-3xl font-extrabold text-center text-transparent bg-clip-text bg-gradient-to-r from-pink-400 to-blue-500">
           Admin Panel
         </h2>
       </div>
       <div className="flex flex-col space-y-6">
         <Link
-          to="/"
+          to="/dashboard"
           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
         >
           <FaTachometerAlt size={20} />
-          <span className="text-lg font-semibold">Dashboard</span>
+          <span className="text-lg  font-body">Dashboard</span>
         </Link>
         <Link
-          to="/designs"
+          to="/admin"
           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
         >
           <FaImage size={20} />
-          <span className="text-lg font-semibold">Designs</span>
+          <span className="text-lg font-body">Manage Designs</span>
         </Link>
         <Link
-          to="/uploads"
+          to="/upload"
           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
         >
           <FaUpload size={20} />
-          <span className="text-lg font-semibold">Uploads</span>
+          <span className="text-lg font-body">Uploads</span>
         </Link>
         <Link
-          to="/settings"
+          to="/signup"
           className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
         >
-          <FaCog size={20} />
-          <span className="text-lg font-semibold">Settings</span>
+          <FaUserPlus size={20} />
+          <span className="text-lg font-body">Create User</span>
         </Link>
-
-        {/* Pages Dropdown */}
+        <Link
+          to="/inquiries"
+          className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105"
+        >
+          <FaClipboardList size={20} />
+          <span className="text-lg font-body">Inquiry Details</span>
+        </Link>
         <div className="relative">
           <button
-            onClick={togglePagesDropdown}
+            onClick={toggleExpoDropdown}
             className="flex items-center space-x-3 hover:bg-indigo-600 p-3 rounded-xl transition-all duration-300 ease-in-out transform hover:scale-105 w-full"
           >
-            <FaFileAlt size={20} />
-            <span className="text-lg font-semibold">Pages</span>
+            <FaFolder size={20} />
+            <span className="text-lg font-body">Expo Directory</span>
           </button>
-
-          {isPagesOpen && (
+          {isExpoOpen && (
             <div className="absolute left-0 w-full mt-2 bg-indigo-700 rounded-lg shadow-lg">
               <Link
-                to="/about"
-                className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300"
+                to="/add-directory"
+                className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300 font-body"
               >
-                About Us
+                Add Directory
               </Link>
               <Link
-                to="/contact"
-                className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300"
+                to="/view-directory"
+                className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300 font-body"
               >
-                Contact Us
-              </Link>
-              <Link
-                to="/faq"
-                className="block text-white hover:bg-indigo-600 p-3 rounded-lg transition-all duration-300"
-              >
-                FAQ
+                View Directory
               </Link>
             </div>
           )}
         </div>
       </div>
       <div className="absolute bottom-6 left-6 text-sm">
-        <p className="text-gray-300">© 2024 Design Bullz</p>
+        <p className="text-gray-300 font-heading">© 2024 Design Bullz</p>
       </div>
     </div>
   );

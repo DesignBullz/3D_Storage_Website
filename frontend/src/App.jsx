@@ -9,6 +9,9 @@ import Signup from "./pages/Signup.jsx";
 import AdminLogin from "./pages/AdminLogin.jsx";
 import AdminDashboard from "./pages/AdminDashboard.jsx";
 import InquiryForm from "./pages/InquiryForm.jsx";
+import InquiriesPage from "./pages/InquiriesPage.jsx";
+import AddDirectory from "./pages/AddDirectory.jsx";
+import ViewDirectory from "./pages/ViewDirectory.jsx";
 function App() {
   return (
     <Router>
@@ -22,6 +25,9 @@ function App() {
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<AdminDashboard />} />
         <Route path="/form" element={<InquiryForm />} />
+        <Route path="/inquiries" element={<InquiriesPage />} />
+        <Route path="/add-directory" element={<AddDirectory />} />
+        <Route path="/view-directory" element={<ViewDirectory />} />
       </Routes>
     </Router>
   );

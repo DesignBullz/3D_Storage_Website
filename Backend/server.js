@@ -8,6 +8,7 @@ import colors from "colors";
 import fs from "fs";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import nodemailer from "nodemailer";
 
 dotenv.config();
 const app = express();
@@ -491,7 +492,6 @@ app.delete("/uploads/:fileNumber", (req, res) => {
   });
 });
 
-// API to handle form submission
 app.post(
   "/submit-inquiry",
   upload.fields([
@@ -525,39 +525,45 @@ app.post(
     } = req.body;
 
     const floorPlanUrl = req.files["floorPlan"]
-      ? `/uploads/${req.files["floorPlan"][0].filename}`
+      ? `https://api.dbzmanager.com/uploads/${req.files["floorPlan"][0].filename}`
       : "";
     const logoFilesUrl = req.files["logoFiles"]
-      ? `/uploads/${req.files["logoFiles"][0].filename}`
+      ? `https://api.dbzmanager.com/uploads/${req.files["logoFiles"][0].filename}`
       : "";
+
+    const submissionTime = new Date()
+      .toISOString()
+      .slice(0, 19)
+      .replace("T", " "); // Correct format for MySQL
 
     // Insert form data into MySQL database
     const query = `INSERT INTO inquiry_form (
-    company_name,
-    contact_person,
-    contact_email,
-    contact_number,
-    website,
-    event_name,
-    venue_city,
-    event_date,
-    stall_size,
-    sides_open_stall,
-    floor_plan_url,
-    logo_files_url,
-    brand_color,
-    meeting_room_required,
-    store_room_required,
-    tv_led_wall_required,
-    product_display,
-    seating_requirements,
-    number_of_products,
-    size_of_products,
-    weight_of_products,
-    deadline,
-    specific_information,
-    suggested_budget
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+      company_name,
+      contact_person,
+      contact_email,
+      contact_number,
+      website,
+      event_name,
+      venue_city,
+      event_date,
+      stall_size,
+      sides_open_stall,
+      floor_plan_url,
+      logo_files_url,
+      brand_color,
+      meeting_room_required,
+      store_room_required,
+      tv_led_wall_required,
+      product_display,
+      seating_requirements,
+      number_of_products,
+      size_of_products,
+      weight_of_products,
+      deadline,
+      specific_information,
+      suggested_budget,
+      submission_time
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
 
     const values = [
       companyName,
@@ -584,6 +590,7 @@ app.post(
       deadline,
       specificInformation,
       suggestedBudget,
+      submissionTime, // Now in correct format for MySQL
     ];
 
     db.query(query, values, (err, results) => {
@@ -598,6 +605,141 @@ app.post(
   }
 );
 
+// GET route to fetch inquiries
+
+app.get("/get-inquiries", (req, res) => {
+  // Query to fetch all inquiries from the database
+  const query = "SELECT * FROM inquiry_form";
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching data from the database:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    // Check if a specific file is requested for download
+    if (req.query.download) {
+      const fileToDownload = path.resolve("./uploads", req.query.download);
+
+      // Check if the file exists
+      if (fs.existsSync(fileToDownload)) {
+        const fileName = path.basename(fileToDownload);
+
+        // Force the file to be downloaded
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${fileName}"`
+        );
+        res.setHeader("Content-Type", "application/octet-stream");
+
+        // Stream the file for download
+        return fs
+          .createReadStream(fileToDownload)
+          .on("error", (error) => {
+            console.error("Error streaming file:", error);
+            res.status(500).send("Error while downloading the file.");
+          })
+          .pipe(res);
+      } else {
+        return res.status(404).json({ error: "File not found" });
+      }
+    }
+
+    // If no file is requested for download, return inquiry data
+    res.status(200).json({
+      message: "Inquiries fetched successfully",
+      data: results.map((inquiry) => ({
+        ...inquiry,
+        floorPlanDownloadLink: `https://api.dbzmanager.com/get-inquiries?download=${path.basename(
+          inquiry.floor_plan_url
+        )}`,
+        logoFileDownloadLink: `https://api.dbzmanager.com/get-inquiries?download=${path.basename(
+          inquiry.logo_files_url
+        )}`,
+      })),
+    });
+  });
+});
+
+// POST route to handle the form submission
+app.post("/add-directory", upload.single("document"), (req, res) => {
+  const { exhibitionName, year, venue } = req.body;
+  const documentUrl = req.file
+    ? `https://api.dbzmanager.com/uploads/${req.file.filename}`
+    : null;
+
+  // Insert data into MySQL
+  const query = `INSERT INTO exhibition_directory (exhibition_name, year, venue, document_url) 
+                 VALUES (?, ?, ?, ?)`;
+
+  const values = [exhibitionName, year, venue, documentUrl];
+
+  db.query(query, values, (err, results) => {
+    if (err) {
+      console.error("Error inserting data:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    res.status(200).json({
+      message: "Exhibition directory added successfully!",
+      data: results,
+    });
+  });
+});
+
+app.get("/get-directories", (req, res) => {
+  // Query to fetch all directories from the database
+  const query = "SELECT * FROM exhibition_directory";
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching data from the database:", err);
+      return res.status(500).json({ error: "Internal Server Error" });
+    }
+
+    // Check if a specific file is requested for download
+    if (req.query.download) {
+      const fileToDownload = path.resolve("./uploads", req.query.download);
+
+      // Check if the file exists
+      if (fs.existsSync(fileToDownload)) {
+        const fileName = path.basename(fileToDownload);
+
+        // Force the file to be downloaded
+        res.setHeader(
+          "Content-Disposition",
+          `attachment; filename="${fileName}"`
+        );
+        res.setHeader("Content-Type", "application/octet-stream");
+
+        // Stream the file for download
+        return fs
+          .createReadStream(fileToDownload)
+          .on("error", (error) => {
+            console.error("Error streaming file:", error);
+            res.status(500).send("Error while downloading the file.");
+          })
+          .pipe(res);
+      } else {
+        return res.status(404).json({ error: "File not found" });
+      }
+    }
+
+    // If no file is requested for download, return directory data
+    res.status(200).json({
+      message: "Directories fetched successfully",
+      data: results.map((directory) => ({
+        ...directory,
+        documentDownloadLink: directory.document_url
+          ? `https://api.dbzmanager.com/get-directories?download=${path.basename(
+              directory.document_url
+            )}`
+          : null,
+      })),
+    });
+  });
+});
+
 // Serve static files from the 'uploads' folder
 app.use("/uploads", express.static("uploads"));
 
@@ -605,5 +747,3 @@ app.use("/uploads", express.static("uploads"));
 app.listen(port, () =>
   console.log(`Server running on port ${port}🚀`.bgCyan.white)
 );
-
-//updated

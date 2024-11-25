@@ -138,7 +138,7 @@ const InquiryForm = () => {
         <form onSubmit={handleSubmit} className="p-6 space-y-6">
           {/* Company Information */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Company Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -152,7 +152,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Contact Person <span className="text-red-500">*</span>
             </label>
             <input
@@ -166,7 +166,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Contact Email <span className="text-red-500">*</span>
             </label>
             <input
@@ -180,7 +180,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Contact Number <span className="text-red-500">*</span>
             </label>
             <input
@@ -194,7 +194,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Website URL
             </label>
             <input
@@ -209,7 +209,7 @@ const InquiryForm = () => {
 
           {/* Event Information */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Exhibition/Event Name <span className="text-red-500">*</span>
             </label>
             <input
@@ -223,7 +223,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Venue/City <span className="text-red-500">*</span>
             </label>
             <input
@@ -237,7 +237,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Event Date <span className="text-red-500">*</span>
             </label>
             <input
@@ -250,7 +250,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Stall Size (mtr X mtr) <span className="text-red-500">*</span>
             </label>
             <input
@@ -264,7 +264,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               How many sides open stall? <span className="text-red-500">*</span>
             </label>
             <input
@@ -279,7 +279,7 @@ const InquiryForm = () => {
           </div>
 
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Floor Plan (Please Attach) <span className="text-red-500">*</span>
             </label>
             <input
@@ -293,7 +293,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Logo Files (Please Attach) <span className="text-red-500">*</span>
             </label>
             <input
@@ -309,7 +309,7 @@ const InquiryForm = () => {
 
           {/* Stand Requirements */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Brand Color <span className="text-red-500">*</span>
             </label>
             <input
@@ -325,7 +325,7 @@ const InquiryForm = () => {
 
           {/* Meeting Room Required */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Meeting Room Required?
             </label>
             <div className="flex items-center space-x-4">
@@ -356,7 +356,7 @@ const InquiryForm = () => {
 
           {/* Store Room Required */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700 ">
               Store Room Required?
             </label>
             <div className="flex items-center space-x-4">
@@ -387,7 +387,7 @@ const InquiryForm = () => {
 
           {/* TV / LED Wall Required */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               TV / LED Wall Required?
             </label>
             <div className="flex items-center space-x-4">
@@ -418,7 +418,7 @@ const InquiryForm = () => {
 
           {/* Product Display Type */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               What Type of Product Display Required?
             </label>
             <div className="flex items-center space-x-4">
@@ -460,68 +460,76 @@ const InquiryForm = () => {
 
           {/* Seating Requirements */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700 mb-2">
               Seating Requirement (Multiple Choice Options)
             </label>
-            <div className="flex items-center space-x-4">
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="seatingRequirements"
-                  value="Round Table with Chairs"
-                  checked={formData.seatingRequirements.includes(
-                    "Round Table with Chairs"
-                  )}
-                  onChange={handleSeatingRequirementsChange}
-                  className="form-checkbox"
-                />
-                <span className="ml-2">Round Table with Chairs</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="seatingRequirements"
-                  value="Sofa Seating"
-                  checked={formData.seatingRequirements.includes(
-                    "Sofa Seating"
-                  )}
-                  onChange={handleSeatingRequirementsChange}
-                  className="form-checkbox"
-                />
-                <span className="ml-2">Sofa Seating</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="seatingRequirements"
-                  value="Height Table with Bar Chair"
-                  checked={formData.seatingRequirements.includes(
-                    "Height Table with Bar Chair"
-                  )}
-                  onChange={handleSeatingRequirementsChange}
-                  className="form-checkbox"
-                />
-                <span className="ml-2">Height Table with Bar Chair</span>
-              </label>
-              <label className="inline-flex items-center">
-                <input
-                  type="checkbox"
-                  name="seatingRequirements"
-                  value="Mocktails Bar Table with Seating"
-                  checked={formData.seatingRequirements.includes(
-                    "Mocktails Bar Table with Seating"
-                  )}
-                  onChange={handleSeatingRequirementsChange}
-                  className="form-checkbox"
-                />
-                <span className="ml-2">Mocktails Bar Table with Seating</span>
-              </label>
+            <div className="space-y-2">
+              <div>
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="seatingRequirements"
+                    value="Round Table with Chairs"
+                    checked={formData.seatingRequirements.includes(
+                      "Round Table with Chairs"
+                    )}
+                    onChange={handleSeatingRequirementsChange}
+                    className="form-checkbox"
+                  />
+                  <span className="ml-2">Round Table with Chairs</span>
+                </label>
+              </div>
+              <div>
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="seatingRequirements"
+                    value="Sofa Seating"
+                    checked={formData.seatingRequirements.includes(
+                      "Sofa Seating"
+                    )}
+                    onChange={handleSeatingRequirementsChange}
+                    className="form-checkbox"
+                  />
+                  <span className="ml-2">Sofa Seating</span>
+                </label>
+              </div>
+              <div>
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="seatingRequirements"
+                    value="Height Table with Bar Chair"
+                    checked={formData.seatingRequirements.includes(
+                      "Height Table with Bar Chair"
+                    )}
+                    onChange={handleSeatingRequirementsChange}
+                    className="form-checkbox"
+                  />
+                  <span className="ml-2">Height Table with Bar Chair</span>
+                </label>
+              </div>
+              <div>
+                <label className="inline-flex items-center">
+                  <input
+                    type="checkbox"
+                    name="seatingRequirements"
+                    value="Mocktails Bar Table with Seating"
+                    checked={formData.seatingRequirements.includes(
+                      "Mocktails Bar Table with Seating"
+                    )}
+                    onChange={handleSeatingRequirementsChange}
+                    className="form-checkbox"
+                  />
+                  <span className="ml-2">Mocktails Bar Table with Seating</span>
+                </label>
+              </div>
             </div>
           </div>
 
           {/* Additional Product and Design Information */}
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Number of Products
             </label>
             <input
@@ -534,7 +542,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Size of Products
             </label>
             <input
@@ -547,7 +555,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Weight of Products
             </label>
             <input
@@ -560,7 +568,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Deadline for Design to be Needed
             </label>
             <input
@@ -574,7 +582,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Anything Specific Information You Want to Share for Designing?
             </label>
             <textarea
@@ -586,7 +594,7 @@ const InquiryForm = () => {
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">
+            <label className="block text-sm font-bold text-gray-700">
               Please Suggest Your Budget (Important)
             </label>
             <textarea
