@@ -12,6 +12,8 @@ import InquiryForm from "./pages/InquiryForm.jsx";
 import InquiriesPage from "./pages/InquiriesPage.jsx";
 import AddDirectory from "./pages/AddDirectory.jsx";
 import ViewDirectory from "./pages/ViewDirectory.jsx";
+import UpcomingEvents from "./pages/UpcomingEvents.jsx";
+import EventDetails from "./pages/EventDetails.jsx";
 function App() {
   return (
     <Router>
@@ -28,6 +30,8 @@ function App() {
         <Route path="/inquiries" element={<InquiriesPage />} />
         <Route path="/add-directory" element={<AddDirectory />} />
         <Route path="/view-directory" element={<ViewDirectory />} />
+        <Route path="/events" element={<UpcomingEvents />} />
+        <Route path="/event" element={<EventDetails />} />
       </Routes>
     </Router>
   );

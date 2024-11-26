@@ -1,22 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+
 import axios from "axios";
-import {
-  FaFileImage,
-  FaCube,
-  FaArrowRight,
-  FaDesktop,
-  FaTrashAlt,
-  FaEdit,
-  FaUserCircle,
-  FaSearch,
-  FaTimesCircle,
-} from "react-icons/fa";
+import { FaTrashAlt, FaEdit, FaUserCircle } from "react-icons/fa";
 import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
 
 function AdminPanel() {
   const [files, setFiles] = useState([]);
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
   const [searchParams, setSearchParams] = useState({
@@ -149,6 +139,7 @@ function AdminPanel() {
       <Header />
 
       {/* Admin Panel Section */}
+      {/* Admin Panel Section */}
       <div className="w-full p-6 text-center shadow-lg flex justify-center items-center">
         <div className="flex items-center">
           <FaUserCircle size={60} />
@@ -159,100 +150,137 @@ function AdminPanel() {
         </div>
       </div>
 
-      <main className="flex-grow flex flex-col items-center p-8">
-        <div className="w-full max-w-7xl p-8 border rounded-lg shadow-lg bg-gray-100">
-          <h2 className="text-4xl font-heading font-bold mb-8 text-center text-blue-600">
-            Search Files
-          </h2>
-          <div className="flex items-center justify-between gap-8 mb-6">
-            {/* Design Selection */}
-            <div className="w-[20%]">
-              <label className="block text-sm font-semibold mb-2">Design</label>
-              <select
-                value={searchParams.design}
-                onChange={(e) =>
-                  setSearchParams({ ...searchParams, design: e.target.value })
-                }
-                className="border p-3 rounded-md w-full"
-              >
-                <option value="">Select Design</option>
-                {[
-                  "1 side open",
-                  "2 side open",
-                  "3 side open",
-                  "4 side open",
-                ].map((design, index) => (
-                  <option key={index} value={design}>
-                    {design}
-                  </option>
-                ))}
-              </select>
-            </div>
+      <main className="flex-grow flex items-center justify-center p-4 sm:p-8">
+        <div className="w-full max-w-7xl p-4 sm:p-6 border rounded-lg shadow-lg bg-white mx-auto">
+          <div className="mb-6">
+            <div className="flex flex-wrap items-center space-y-4 sm:space-y-0 sm:space-x-4">
+              {/* Stall Layout Selector */}
+              <div className="w-full sm:w-[48%] md:w-[25%]">
+                <h2 className="text-xl font-semibold text-black mb-2">
+                  Select Stall Layout
+                </h2>
+                <div className="relative">
+                  <select
+                    value={searchParams.design}
+                    onChange={(e) => {
+                      const updatedSearchParams = {
+                        ...searchParams,
+                        design: e.target.value,
+                      };
+                      setSearchParams(updatedSearchParams);
+                      // Store updated searchParams in localStorage
+                      localStorage.setItem(
+                        "searchParams",
+                        JSON.stringify(updatedSearchParams)
+                      );
+                    }}
+                    className="block w-full p-3 border-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  >
+                    <option value="">Select Design</option>
+                    <option value="1 side open">1 side open</option>
+                    <option value="2 side open">2 side open</option>
+                    <option value="3 side open">3 side open</option>
+                    <option value="4 side open">4 side open</option>
+                  </select>
+                </div>
+              </div>
 
-            {/* Front Input */}
-            <div className="w-[20%]">
-              <label className="block text-sm font-semibold mb-2">Front</label>
-              <input
-                type="text"
-                placeholder="Enter Front Dimension"
-                value={searchParams.front}
-                onChange={(e) =>
-                  setSearchParams({ ...searchParams, front: e.target.value })
-                }
-                className="border p-3 rounded-md w-full"
-              />
-            </div>
+              {/* Stall Size Inputs */}
+              <div className="w-full sm:w-[48%] md:w-[25%]">
+                <h2 className="text-xl font-semibold text-black mb-2">
+                  Enter Stall Size (In Meters)
+                </h2>
+                <div className="flex items-center space-x-2">
+                  <input
+                    type="text"
+                    placeholder="Front"
+                    value={searchParams.front}
+                    onChange={(e) => {
+                      const updatedSearchParams = {
+                        ...searchParams,
+                        front: e.target.value,
+                      };
+                      setSearchParams(updatedSearchParams);
+                      // Store updated searchParams in localStorage
+                      localStorage.setItem(
+                        "searchParams",
+                        JSON.stringify(updatedSearchParams)
+                      );
+                    }}
+                    className="border-2 p-3 rounded-md w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                  <span className="text-xl font-bold text-black">X</span>
+                  <input
+                    type="text"
+                    placeholder="Depth"
+                    value={searchParams.depth}
+                    onChange={(e) => {
+                      const updatedSearchParams = {
+                        ...searchParams,
+                        depth: e.target.value,
+                      };
+                      setSearchParams(updatedSearchParams);
+                      // Store updated searchParams in localStorage
+                      localStorage.setItem(
+                        "searchParams",
+                        JSON.stringify(updatedSearchParams)
+                      );
+                    }}
+                    className="border-2 p-3 rounded-md w-1/2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  />
+                </div>
+              </div>
 
-            {/* Depth Input */}
-            <div className="w-[20%]">
-              <label className="block text-sm font-semibold mb-2">Depth</label>
-              <input
-                type="text"
-                placeholder="Enter Depth Dimension"
-                value={searchParams.depth}
-                onChange={(e) =>
-                  setSearchParams({ ...searchParams, depth: e.target.value })
-                }
-                className="border p-3 rounded-md w-full"
-              />
-            </div>
+              {/* Industry Dropdown */}
+              <div className="w-full sm:w-[48%] md:w-[25%]">
+                <h2 className="text-xl font-semibold text-black mb-2">
+                  Select Industry (Optional)
+                </h2>
+                <select
+                  value={searchParams.industry}
+                  onChange={(e) => {
+                    const updatedSearchParams = {
+                      ...searchParams,
+                      industry: e.target.value,
+                    };
+                    setSearchParams(updatedSearchParams);
+                    // Store updated searchParams in localStorage
+                    localStorage.setItem(
+                      "searchParams",
+                      JSON.stringify(updatedSearchParams)
+                    );
+                  }}
+                  className="border-2 p-3 rounded-md w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
+                >
+                  <option value="">Select Industry</option>
+                  {industries.map((industry, index) => (
+                    <option key={index} value={industry}>
+                      {industry}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-            {/* Industry Dropdown */}
-            <div className="w-[20%]">
-              <label className="block text-sm font-semibold mb-2">
-                Industry
-              </label>
-              <select
-                value={searchParams.industry}
-                onChange={(e) =>
-                  setSearchParams({ ...searchParams, industry: e.target.value })
-                }
-                className="border p-3 rounded-md w-full"
-              >
-                <option value="">Select Industry</option>
-                {industries.map((industry, index) => (
-                  <option key={index} value={industry}>
-                    {industry}
-                  </option>
-                ))}
-              </select>
+              {/* Search Button */}
+              <div className="w-full sm:w-auto md:w-[20%] mt-4 sm:mt-9">
+                <button
+                  onClick={handleSearch}
+                  className="bg-blue-500 text-white px-4 py-2 mt-9 rounded-md w-full sm:w-auto hover:bg-blue-600 transition duration-300"
+                >
+                  Search
+                </button>
+              </div>
             </div>
+          </div>
 
-            {/* Search and Reset Buttons */}
-            <div className="flex gap-4 w-[20%] justify-center">
-              <button
-                onClick={handleSearch}
-                className="bg-blue-500 mt-5 text-white px-4 py-2 rounded-md shadow hover:bg-blue-600"
-              >
-                <FaSearch className="inline mr-2" /> Search
-              </button>
-              <button
-                onClick={handleReset}
-                className="bg-gray-400 mt-5 text-white px-4 py-2 rounded-md shadow hover:bg-gray-500"
-              >
-                <FaTimesCircle className="inline mr-2" /> Reset
-              </button>
-            </div>
+          {/* Loading/Error Messages */}
+          <div className="mb-6">
+            {loading && (
+              <p className="mt-4 text-center text-black">Loading files...</p>
+            )}
+            {errorMessage && (
+              <p className="text-red-600 mt-4">{errorMessage}</p>
+            )}
           </div>
         </div>
       </main>
@@ -439,8 +467,6 @@ function AdminPanel() {
           </div>
         </div>
       )}
-
-      <Footer />
     </div>
   );
 }

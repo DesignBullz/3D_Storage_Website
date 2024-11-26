@@ -142,7 +142,7 @@ function Login() {
     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100">
       <Header />
       <main className="flex justify-center items-center flex-grow p-8">
-        <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105 duration-500">
+        <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl transform transition-all ">
           <h2 className="text-2xl font-heading font-bold text-center text-gray-700 mb-6">
             Login
           </h2>
