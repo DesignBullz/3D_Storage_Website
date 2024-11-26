@@ -740,6 +740,59 @@ app.get("/get-directories", (req, res) => {
   });
 });
 
+// POST API endpoint to add a new event
+app.post("/add-event", (req, res) => {
+  const {
+    exhibitionName,
+    startDate,
+    endDate,
+    venue,
+    city,
+    directoryAvailable,
+    existingClients,
+  } = req.body;
+
+  const query = `INSERT INTO events (exhibition_name, start_date, end_date, venue, city, directory_available, existing_clients)
+                 VALUES (?, ?, ?, ?, ?, ?, ?)`;
+
+  db.query(
+    query,
+    [
+      exhibitionName,
+      startDate,
+      endDate,
+      venue,
+      city,
+      directoryAvailable,
+      existingClients ? existingClients.join(", ") : "",
+    ],
+    (err, result) => {
+      if (err) {
+        console.error("Error inserting data:", err);
+        return res.status(500).json({ message: "Error submitting event data" });
+      }
+
+      res
+        .status(200)
+        .json({ message: "Event details submitted successfully!" });
+    }
+  );
+});
+
+// GET API endpoint to fetch all events
+app.get("/events", (req, res) => {
+  const query = "SELECT * FROM events ORDER BY start_date DESC"; // Fetch all events, ordered by start date
+
+  db.query(query, (err, results) => {
+    if (err) {
+      console.error("Error fetching events:", err);
+      return res.status(500).json({ message: "Error fetching events" });
+    }
+
+    res.status(200).json({ events: results });
+  });
+});
+
 // Serve static files from the 'uploads' folder
 app.use("/uploads", express.static("uploads"));
 
