@@ -1,8 +1,8 @@
 // import React, { useState } from "react";
 // import { FaUserAlt, FaLock } from "react-icons/fa";
 // import { useNavigate } from "react-router-dom";
-// import Header from "./Header";
-// import Footer from "./Footer";
+// import Header from "./Header.jsx";
+// import Footer from "./Footer.jsx";
 // import axios from "axios";
 
 // function Login() {
@@ -15,7 +15,7 @@
 //     e.preventDefault();
 
 //     try {
-//       const response = await axios.post("http://localhost:8080/login", {
+//       const response = await axios.post("https://api.dbzmanager.com/login", {
 //         email,
 //         password,
 //       });
@@ -41,7 +41,7 @@
 //     <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100">
 //       <Header />
 //       <main className="flex justify-center items-center flex-grow p-8">
-//         <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl transform transition-all hover:scale-105 duration-500">
+//         <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl transform transition-all ">
 //           <h2 className="text-2xl font-heading font-bold text-center text-gray-700 mb-6">
 //             Login
 //           </h2>
@@ -102,9 +102,9 @@
 import React, { useState } from "react";
 import { FaUserAlt, FaLock } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
 import axios from "axios";
+import backgroundImage from "../assets/r.jpg"; // Adjust the path to your image
+import { Link } from "react-router-dom"; // Import Link from react-router-dom
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -116,7 +116,7 @@ function Login() {
     e.preventDefault();
 
     try {
-      const response = await axios.post("https://api.dbzmanager.com/login", {
+      const response = await axios.post("http://localhost:8080/login", {
         email,
         password,
       });
@@ -139,14 +139,29 @@ function Login() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100">
-      <Header />
+    <div
+      className="flex flex-col min-h-screen bg-gradient-to-b from-blue-50 to-indigo-100"
+      style={{
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover", // Ensures the image fully covers the container
+        backgroundPosition: "center", // Keeps the image centered
+        backgroundRepeat: "no-repeat", // Prevents the background from repeating
+        backgroundAttachment: "fixed", // Keeps the background fixed when scrolling
+        height: "100vh", // Ensures the container takes up the full viewport height
+      }}
+    >
       <main className="flex justify-center items-center flex-grow p-8">
-        <div className="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl transform transition-all ">
+        <div
+          className="w-full max-w-md p-8 bg-white rounded-xl shadow-2xl transform transition-all absolute"
+          style={{
+            right: "150px", // Adjust this value to control how much space to the left the form should have
+            top: "50%",
+            transform: "translateY(-50%)", // To vertically center the form
+          }}
+        >
           <h2 className="text-2xl font-heading font-bold text-center text-gray-700 mb-6">
             Login
           </h2>
-
           <form onSubmit={handleLogin}>
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-600 mb-2">
@@ -186,14 +201,23 @@ function Login() {
 
             <button
               type="submit"
-              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-6 py-2 rounded-md w-full hover:bg-gradient-to-r hover:from-blue-600 hover:to-purple-600 transition-all duration-300"
+              className="bg-gradient-to-r from-red-500 to-black text-white px-6 py-2 rounded-md w-full hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-600 transition-all duration-300"
             >
               Login
             </button>
           </form>
+
+          {/* Sign-up Link */}
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              Don't have an account?{" "}
+              <Link to="/signup" className="text-blue-600 hover:underline">
+                Sign up
+              </Link>
+            </p>
+          </div>
         </div>
       </main>
-      <Footer />
     </div>
   );
 }
