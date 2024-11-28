@@ -516,7 +516,7 @@ function ViewFiles() {
               <div className="w-full sm:w-[20%] mt-4 sm:mt-9">
                 <button
                   onClick={handleSearch}
-                  className="bg-blue-500 text-white px-4 py-2 mt-9 rounded-md w-full hover:bg-blue-600 transition duration-300"
+                  className="bg-gradient-to-r from-red-500 to-black text-white px-4 py-2 mt-9 rounded-md w-full hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-600 transition-all duration-300"
                 >
                   Search
                 </button>
@@ -549,7 +549,7 @@ function ViewFiles() {
               className="border-2 p-6 rounded-lg shadow-lg flex flex-col sm:flex-row-reverse mb-6 bg-white"
             >
               <div className="sm:w-2/3 sm:pl-6">
-                <h4 className="font-semibold text-xl mb-2 text-blue-600">
+                <h4 className="font-semibold text-xl mb-2 text-red-700">
                   {clickedFile ? clickedFile.design : mainFile.design}
                 </h4>
                 <p className="text-gray-500">
@@ -570,7 +570,7 @@ function ViewFiles() {
                       clickedFile ? clickedFile.file_url_1 : mainFile.file_url_1
                     }
                     download
-                    className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 transition duration-300"
+                    className="bg-gradient-to-r from-red-500 to-black text-white px-4 py-2 rounded-md hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-600 transition-all duration-300"
                   >
                     Download
                   </a>

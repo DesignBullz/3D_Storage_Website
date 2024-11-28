@@ -13,11 +13,6 @@ td {
   border: 1px solid #ddd; /* Adds border around cells */
 }
 
-th {
-  background-color: #4caf50;
-  color: white;
-}
-
 td {
   background-color: #f2f2f2;
 }

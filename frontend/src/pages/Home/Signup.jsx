@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { FaUserAlt, FaLock, FaEnvelope } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import backgroundImage from "../../assets/j.jpg"; // Adjust the path to your image
 
 function Signup() {
@@ -84,6 +84,7 @@ function Signup() {
           </h2>
 
           <form onSubmit={handleSignup}>
+            {/* Username Field */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-600 mb-2">
                 Username
@@ -100,6 +101,7 @@ function Signup() {
               </div>
             </div>
 
+            {/* Email Field */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-600 mb-2">
                 Email
@@ -116,6 +118,7 @@ function Signup() {
               </div>
             </div>
 
+            {/* Password Field */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-600 mb-2">
                 Password
@@ -132,6 +135,7 @@ function Signup() {
               </div>
             </div>
 
+            {/* Confirm Password Field */}
             <div className="mb-6">
               <label className="block text-sm font-medium text-gray-600 mb-2">
                 Confirm Password
@@ -148,10 +152,12 @@ function Signup() {
               </div>
             </div>
 
+            {/* Error Message */}
             {errorMessage && (
               <p className="text-red-600 text-center mb-4">{errorMessage}</p>
             )}
 
+            {/* Signup Button */}
             <button
               type="submit"
               className="bg-gradient-to-r from-red-500 to-black text-white px-6 py-2 rounded-md w-full hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-600 transition-all duration-300"
@@ -159,6 +165,16 @@ function Signup() {
               Sign Up
             </button>
           </form>
+
+          {/* Login Link */}
+          <div className="mt-4 text-center">
+            <p className="text-sm text-gray-600">
+              Already have an account?{" "}
+              <Link to="/" className="text-blue-600 hover:underline">
+                Login
+              </Link>
+            </p>
+          </div>
         </div>
       </main>
     </div>

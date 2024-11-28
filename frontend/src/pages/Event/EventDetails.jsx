@@ -90,26 +90,26 @@ const EventDetails = () => {
             <>
               <table className="min-w-full table-auto">
                 <thead>
-                  <tr className="bg-gray-100">
-                    <th className="px-4 py-2 font-heading text-left text-indigo-600">
+                  <tr className="bg-gradient-to-r from-yellow-300 to-yellow-600 text-white">
+                    <th className="px-4 py-2 font-heading text-left text-white">
                       Exhibition Name
                     </th>
-                    <th className="px-4 py-2 text-left font-heading text-indigo-600">
+                    <th className="px-4 py-2 text-left font-heading text-white">
                       Venue
                     </th>
-                    <th className="px-4 py-2 font-heading text-left text-indigo-600">
+                    <th className="px-4 py-2 font-heading text-left text-white">
                       City
                     </th>
-                    <th className="px-4 py-2 font-heading text-left text-indigo-600">
+                    <th className="px-4 py-2 font-heading text-left text-white">
                       Start Date
                     </th>
-                    <th className="px-4 py-2 font-heading text-left text-indigo-600">
+                    <th className="px-4 py-2 font-heading text-left text-white">
                       End Date
                     </th>
-                    <th className="px-4 py-2 font-heading text-left text-indigo-600">
+                    <th className="px-4 py-2 font-heading text-left text-white">
                       Directory Available
                     </th>
-                    <th className="px-4 py-2 font-heading text-left text-indigo-600">
+                    <th className="px-4 py-2 font-heading text-left text-white">
                       Existing Clients
                     </th>
                   </tr>
@@ -142,7 +142,7 @@ const EventDetails = () => {
               <div className="flex items-center justify-between mt-4">
                 <button
                   onClick={handlePrevPage}
-                  className="px-6 py-3 text-white bg-indigo-600 rounded-lg disabled:bg-gray-300"
+                  className="px-6 py-3 bg-gradient-to-r from-red-500 to-black text-white rounded-lg  hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-600 transition-all duration-300"
                   disabled={currentPage === 1}
                 >
                   Previous
@@ -155,7 +155,7 @@ const EventDetails = () => {
 
                 <button
                   onClick={handleNextPage}
-                  className="px-6 py-3 text-white bg-indigo-600 rounded-lg disabled:bg-gray-300"
+                  className="px-6 py-3 bg-gradient-to-r from-red-500 to-black text-white rounded-lg hover:bg-gradient-to-r hover:from-yellow-300 hover:to-yellow-600 transition-all duration-300"
                   disabled={currentPage === totalPages}
                 >
                   Next
