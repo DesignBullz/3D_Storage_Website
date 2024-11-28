@@ -633,7 +633,7 @@
 
 // export default ViewFiles;
 
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
 import { FaFileImage, FaCube, FaArrowRight, FaDesktop } from "react-icons/fa";
 import Header from "../../components/Header";
@@ -654,6 +654,8 @@ function ViewFiles() {
   const [searched, setSearched] = useState(false);
   const [clickedFile, setClickedFile] = useState(null);
 
+  const detailsRef = useRef(null); // Add a ref for the File Details section
+
   const designs = [
     { label: "1 side open", icon: <FaArrowRight size={24} /> },
     { label: "2 side open", icon: <FaCube size={24} /> },
@@ -668,7 +670,6 @@ function ViewFiles() {
           "https://api.dbzmanager.com/industries"
         );
         setIndustries(response.data.industries);
-        // Store industries in localStorage
         localStorage.setItem(
           "industries",
           JSON.stringify(response.data.industries)
@@ -679,7 +680,6 @@ function ViewFiles() {
       }
     };
 
-    // Check if industries are in localStorage
     const storedIndustries = localStorage.getItem("industries");
     if (storedIndustries) {
       setIndustries(JSON.parse(storedIndustries));
@@ -687,7 +687,6 @@ function ViewFiles() {
       fetchIndustries();
     }
 
-    // Check if files exist in localStorage
     const storedFiles = localStorage.getItem("files");
     if (storedFiles) {
       setFiles(JSON.parse(storedFiles));
@@ -705,7 +704,6 @@ function ViewFiles() {
         params: { design, front_depth, industry },
       });
       setFiles(response.data.uploads);
-      // Store files in localStorage
       localStorage.setItem("files", JSON.stringify(response.data.uploads));
     } catch (error) {
       setErrorMessage("Error fetching files.");
@@ -716,6 +714,13 @@ function ViewFiles() {
     }
   };
 
+  const handleFileClick = (file) => {
+    setClickedFile(file);
+    if (detailsRef.current) {
+      detailsRef.current.scrollIntoView({ behavior: "smooth" }); // Smooth scroll to the details section
+    }
+  };
+
   const mainFile = files.length > 0 ? files[0] : null;
   const recentFiles = files.length > 1 ? files.slice(1) : [];
 
@@ -723,9 +728,7 @@ function ViewFiles() {
     <div className="flex flex-col min-h-screen bg-white text-black font-body">
       <Header />
       <main className="flex-grow p-4 sm:p-8">
-        {/* Removed border and shadow */}
         <div className="w-full max-w-7xl p-4 sm:p-6 bg-white mx-auto mt-[-30px]">
-          {/* SearchBar below Header, no border or shadow */}
           <SearchBar
             searchParams={searchParams}
             setSearchParams={setSearchParams}
@@ -733,12 +736,13 @@ function ViewFiles() {
             designs={designs}
             industries={industries}
           />
-
-          {/* Add the rest of the code to display files */}
         </div>
       </main>
+
       {(clickedFile || (searched && mainFile)) && (
-        <div className="p-4 sm:p-8">
+        <div ref={detailsRef} className="p-4 sm:p-8">
+          {" "}
+          {/* Attach the ref */}
           <h3 className="text-2xl font-bold mb-4 text-center text-black">
             {clickedFile ? "File Details" : "Search Result"}
           </h3>
@@ -804,14 +808,12 @@ function ViewFiles() {
           <h2 className="text-2xl font-semibold text-center text-black mb-6">
             Recent Files
           </h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 ">
-            {" "}
-            {/* Increased lg:grid-cols-4 to lg:grid-cols-5 and gap-6 to gap-8 */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {recentFiles.map((file, index) => (
               <div
                 key={index}
-                className="border-2 rounded-lg shadow-lg flex justify-center mb-6 bg-white transition transform hover:scale-105 hover:shadow-xl w-full" // Ensure w-full is set to control width
-                onClick={() => setClickedFile(file)}
+                className="border-2 rounded-lg shadow-lg flex justify-center mb-6 bg-white transition transform hover:scale-105 hover:shadow-xl w-full"
+                onClick={() => handleFileClick(file)}
               >
                 {file.file_url_2 && file.file_url_2.match(/\.(jpeg|jpg)$/i) && (
                   <div className="w-full h-[200px] relative overflow-hidden">
