@@ -15,7 +15,7 @@ function Header() {
       <div className="max-w-screen-xl mx-auto flex justify-between items-center flex-col sm:flex-row">
         {/* Left: Logo and Title */}
         <div className="flex items-center space-x-3 mb-4 sm:mb-0">
-          <img src={Logo} alt="Logo" className="w-12 h-12 object-contain" />
+          <img src={Logo} alt="Logo" className="w-w-12 h-12 object-contain" />
           <div className="text-3xl font-heading font-bold">
             3D Model Storage
           </div>
