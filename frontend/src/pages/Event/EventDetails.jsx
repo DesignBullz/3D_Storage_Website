@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "./Header"; // Import the Header component
+import Header from "../../components/Header";
 
 const EventDetails = () => {
   const [events, setEvents] = useState([]);

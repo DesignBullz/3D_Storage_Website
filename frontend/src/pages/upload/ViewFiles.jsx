@@ -292,8 +292,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { FaFileImage, FaCube, FaArrowRight, FaDesktop } from "react-icons/fa";
-import Header from "./Header.jsx";
-import Footer from "./Footer.jsx";
+import Header from "../../components/Header.jsx";
+import Footer from "../../components/Footer.jsx";
 
 function ViewFiles() {
   const [files, setFiles] = useState([]);

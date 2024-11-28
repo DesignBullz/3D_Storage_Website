@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { FaCloudUploadAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import Header from "./Header.jsx";
+import Header from "../../components/Header";
 import axios from "axios";
 
 function Upload() {

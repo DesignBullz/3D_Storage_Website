@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 
 import axios from "axios";
 import { FaTrashAlt, FaEdit, FaUserCircle } from "react-icons/fa";
-import Header from "./Header.jsx";
+import Header from "../../components/Header";
 
 function AdminPanel() {
   const [files, setFiles] = useState([]);

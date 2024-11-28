@@ -220,7 +220,7 @@ import {
 } from "react-icons/ai";
 import { FaCity, FaBuilding } from "react-icons/fa";
 import { MdEventAvailable } from "react-icons/md";
-import Sidebar from "./Sidebar";
+import Sidebar from "../sidebar/Sidebar";
 
 const UpcomingEvents = () => {
   const [eventData, setEventData] = useState({

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "./Sidebar";
+
 import "./style.css";
 
-const InquiriesPage = () => {
+const HeaderInquiry = () => {
   const [inquiries, setInquiries] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -57,8 +57,6 @@ const InquiriesPage = () => {
 
   return (
     <div className="flex">
-      <Sidebar />
-
       <div className="flex-1 p-6">
         <h1 className="text-3xl font-bold text-center mb-6 font-heading">
           Inquiry Details
@@ -453,4 +451,4 @@ const InquiriesPage = () => {
   );
 };
 
-export default InquiriesPage;
+export default HeaderInquiry;

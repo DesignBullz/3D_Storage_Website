@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import Sidebar from "./Sidebar";
+
 import { FaDownload, FaEye } from "react-icons/fa";
 
-const ViewDirectory = () => {
+const HeaderDirectory = () => {
   const [directories, setDirectories] = useState([]);
   const [filteredDirectories, setFilteredDirectories] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -76,7 +76,6 @@ const ViewDirectory = () => {
   return (
     <div className="flex min-h-screen bg-gray-50">
       {/* Sidebar Component */}
-      <Sidebar />
 
       {/* Main Content */}
       <main className="flex-1 p-10">
@@ -198,4 +197,4 @@ const ViewDirectory = () => {
   );
 };
 
-export default ViewDirectory;
+export default HeaderDirectory;

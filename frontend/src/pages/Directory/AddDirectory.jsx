@@ -6,7 +6,7 @@ import {
   FaCalendarAlt,
   FaEdit,
 } from "react-icons/fa"; // Importing icons
-import Sidebar from "./Sidebar";
+import Sidebar from "../sidebar/Sidebar";
 
 const AddDirectory = () => {
   const [formData, setFormData] = useState({
