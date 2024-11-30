@@ -95,11 +95,11 @@ function Header() {
         </div>
 
         {/* Right: Navigation Buttons */}
-        <nav className="flex flex-nowrap items-center justify-between space-x-3 sm:space-x-4 md:space-x-6 lg:space-x-8 overflow-x-auto">
+        <nav className="flex flex-nowrap items-center space-x-4 sm:space-x-6 md:space-x-8">
           {/* 3D Design Button */}
           <a
             href="/view"
-            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full whitespace-nowrap"
+            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full"
           >
             <FaCube className="mr-2 text-lg" /> 3D Design
           </a>
@@ -107,7 +107,7 @@ function Header() {
           {/* Event Button */}
           <a
             href="/event"
-            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full whitespace-nowrap"
+            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full"
           >
             <FaCalendarAlt className="mr-2 text-lg" /> Event
           </a>
@@ -115,7 +115,7 @@ function Header() {
           {/* Inquiries Button */}
           <a
             href="/inquiries2"
-            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full whitespace-nowrap"
+            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full"
           >
             <FaEnvelope className="mr-2 text-lg" /> Inquiries
           </a>
@@ -123,7 +123,7 @@ function Header() {
           {/* Calculator Button */}
           <a
             href="/welcome"
-            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full whitespace-nowrap"
+            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full"
           >
             <FaCalculator className="mr-2 text-lg" /> Calculator
           </a>
@@ -131,7 +131,7 @@ function Header() {
           {/* Directory Button */}
           <a
             href="/directory"
-            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full whitespace-nowrap"
+            className="flex items-center bg-white font-heading font-semibold text-red-700 px-4 py-2 rounded-full"
           >
             <FaAddressBook className="mr-2 text-lg" /> Directory
           </a>
