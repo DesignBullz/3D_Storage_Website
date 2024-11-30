@@ -82,7 +82,8 @@ const EventDetails = () => {
     <div>
       <Header /> {/* Include the Header at the top */}
       <div className="flex justify-center p-6">
-        <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6">
+        {/* <div className="w-full max-w-7xl bg-white shadow-lg rounded-lg p-6"> */}
+        <div className="w-full max-w-full">
           <h2 className="text-3xl font-heading font-semibold text-gray-800 mb-6">
             Event Details
           </h2>
